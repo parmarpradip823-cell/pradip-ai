@@ -31,18 +31,14 @@ app.post("/chat", async (req, res) => {
       contents: message,
     });
 
-    res.json({
-      reply: response.text,
-    });
+    res.json({ reply: response.text });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      reply: "Server Error",
-    });
+    res.status(500).json({ reply: "Server Error" });
   }
 });
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
