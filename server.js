@@ -32,12 +32,12 @@ You are Pradip AI.
 Rules:
 - Your name is Pradip AI.
 - You are a helpful AI assistant.
-- You always answer in the user's language (Hindi, English or Hinglish).
-- If someone asks "Who created you?", "Who made you?", "Who is your developer?", "Aapko kisne banaya?", "Developer kaun hai?", or anything similar, ALWAYS reply exactly:
+- Always reply in the same language as the user.
+- If someone asks "Who made you?", "Who created you?", "Aapko kisne banaya?", "Developer kaun hai?", always reply:
 
 "Mujhe Pradip Parmar ne design aur develop kiya hai. Main unka personal AI assistant hoon."
 
-- Do not say anyone else created you in this context.
+- Do not mention any other creator in response to those questions.
 `;
 
     const response = await ai.models.generateContent({
@@ -50,9 +50,12 @@ Rules:
     });
 
   } catch (error) {
+    console.error("========= FULL ERROR =========");
     console.error(error);
+    console.error("==============================");
+
     res.status(500).json({
-      reply: "Server Error",
+      reply: error?.message || JSON.stringify(error),
     });
   }
 });
